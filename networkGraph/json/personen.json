@@ -1,0 +1,30 @@
+{
+  "nodes":[
+    {"id":0, "type":-1, "name":"Geymüller","group":0, "thema": "RF", "size":200, "probe":1},
+    {"id":1, "type":0, "name":"Josef Durm","group":3, "thema": "RF", "size":12, "probe":0},
+    {"id":2, "type":0, "name":"Notizen von Geymüller","group":1, "thema": "RF", "size":5, "probe":1},
+    {"id":3, "type":0, "name":"Nummerierung von Geymüller","group":1, "thema": "RF", "size":5, "probe":0},
+    {"id":4, "type":0, "name":"Mancini","group":3, "thema": "RF", "size":12, "probe":0},
+    {"id":5, "type":0, "name":"Drucker: Lemercier","group":4, "thema": "RF", "size":8, "probe":0},
+    {"id":6, "type":1, "name":"Bleistiftskizze","group":1, "thema": "RF", "size":5, "probe":0},
+    {"id":7, "type":1, "name":"Stich","group":2, "thema": "RF", "size":123, "probe":0},
+    {"id":8, "type":1, "name":"Rechnung","group":3, "thema": "RF", "size":85, "probe":0},
+    {"id":9, "type":1, "name":"Postkarte","group":4, "thema": "RF", "size":68, "probe":0},
+    {"id":10, "type":1, "name":"Brief","group":4, "thema": "RF", "size":138, "probe":0}    
+  ],
+  "links":[
+    {"source":1,"target":6,"value":2, "type":0},
+    {"source":1,"target":8,"value":12, "type":0},
+    {"source":2,"target":7,"value":1, "type":0},
+    {"source":3,"target":8,"value":2, "type":0},
+    {"source":3,"target":9,"value":3, "type":0},
+    {"source":3,"target":10,"value":6, "type":0},
+    {"source":4,"target":9,"value":2, "type":0},
+    {"source":5,"target":10,"value":8, "type":0},
+    {"source":6,"target":0,"value":20, "type":1},
+    {"source":7,"target":0,"value":14, "type":1},
+    {"source":8,"target":0,"value":45, "type":1},
+    {"source":9,"target":0,"value":55, "type":1},
+    {"source":10,"target":0,"value":28, "type":1}
+  ]
+}

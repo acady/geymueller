@@ -1,0 +1,261 @@
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -170px;
+}
+.description, .push {
+	height: 170px;
+}
+.content {
+	/*min-height: 500px;*/
+}
+
+body {
+  font: 300 36px "Helvetica Neue", "Helvetica", "Arial", serif;
+  /*height: 800px;*/
+  margin: 80px 20px 80px 15px;
+  overflow: hidden;
+  
+  /*position: relative;
+  width: 1120px;*/
+}
+table{
+	margin: 0;
+	padding: 0;
+	border: none; /* 1px solid black;*/
+}
+tr {
+	line-height: 15px;
+}
+.description {
+	/*vertical-align: bottom;*/
+	margin: 0px 10px 80px 10px;
+	
+}
+
+.infobox {
+        font: 300 14px "Helvetica Neue", "Helvetica", "Arial", serif;
+        right: 30px;
+		top: 20px;
+        position: absolute;
+        width: 230px;
+        /*padding: 5px;*/
+        margin: 15px 0 0 0;
+        background-color: rgba(255,255,255,.75);
+        border: 1px solid #CCC;
+}
+
+a:link, a:visited {
+  color: #777;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #666;
+}
+
+blockquote {
+  margin: 0;
+}
+
+blockquote:before {
+  content: "â€œ";
+  position: absolute;
+  left: -.4em;
+}
+
+blockquote:after {
+  content: "â€";
+  position: absolute;
+}
+
+body > ul {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 64px;
+}
+
+h2 {
+  font-size: 24px;
+  /*position: absolute;*/
+}
+h3 {
+  /*bottom: -20px;*/
+  font-size: 18px;
+}
+
+h4 {
+  /*bottom: -20px;*/
+  font-size: 12px;
+}
+
+h1, h2, h3 {
+  font-weight: inherit;
+  margin: 0;
+}
+
+.checkbox {
+	  font-weight: inherit;
+	  font-size: 15px;
+	  margin: 0;
+}
+.description h2, h3 {
+  text-align: right;
+  /*font-size: inherit;*/
+  /*position: absolute;*/
+  right: 20px;
+  bottom: 20px;
+}
+
+.description h2 {
+	/*position: absolute;*/
+}
+
+.selector {
+	position: absolute;
+	bottom: 20px;
+}
+.infobox h5 {
+	font-size: 12px;
+	color: #624848;
+	text-align: left;
+	font-weight: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+.infobox h4 {
+	font-size: 12px;
+	text-align: left;
+	font-weight: inherit;
+	margin: 0;
+	padding: 0;
+}
+.infobox h3 {
+	font-size: 15px;
+	text-align: left;
+	font-weight: inherit;
+	margin: 0;
+	padding: 0;
+}
+.infobox body {
+	margin: 0 5px 0 5px;
+	padding: 0;
+	
+}
+
+input {
+	margin: 2px 0;
+}
+
+svg {
+  font-size: 14px;
+  shape-rendering: crispEdges;
+}
+
+.node {
+  stroke: #333;
+  stroke-width: 1px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.interLink {
+  stroke: #555;
+  stroke-opacity: .8;
+}
+
+.legend {
+	/* legend has also a transform in d3!*/
+	position: absolute;
+	top: 20px;
+	left: 10px;
+	font: 300 14px "Helvetica Neue", "Helvetica", "Arial", serif;
+	font-weight: inherit;
+}
+.legend-box {
+	padding: 20px 0 0 25px;
+}
+.legend rect {
+  fill:white;
+  /*stroke:black;*/
+  opacity:0.8;
+  padding: 20px 0 10px 20px;
+}
+.legend circle {
+	stroke: black;
+	stroke-weight: 1px;
+}
+  
+.legend item {
+  padding: 20px 0 10px 0;	
+} 
+
+
+.year {
+  display: inline-block;
+}
+
+.day {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: .1;
+}
+
+.month {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+
+
+
+.invert {
+  background: #1f1f1f;
+  color: #dcdccc;
+}
+
+.invert h2, .invert h3 {
+  color: #7f9f7f;
+}
+
+.string, .regexp {
+  color: #f39;
+}
+
+.keyword {
+  color: #00c;
+}
+
+.comment {
+  color: #777;
+  font-style: oblique;
+}
+
+.number {
+  color: #369;
+}
+
+.class, .special {
+  color: #1181B8;
+}
+
+body > svg {
+  position: absolute;
+  top: -105px;
+  left: -140px;
+}

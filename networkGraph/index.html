@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:xlink="http://www.w3.org/1999/xlink">
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+	<title>geymueller digital - Network Graph version 0.0.1</title>
+ 	
+ 	<link type="text/css" rel="stylesheet" href="../css/colorbrewer_style.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/colorbrewer.css"/>
+	
+	<style>
+
+	.node {
+	  stroke: #fff;
+	  stroke-width: 2px;
+	}
+
+	.node-probe {
+	  stroke: #111;
+	  stroke-width: 2px;
+	}
+	.node-clear {
+	  stroke: #000;
+	  stroke-width: 0.5px;
+	}
+		
+	.link {
+	  stroke: #999;
+	  stroke-opacity: .6;
+	}
+
+	.link-base {
+	  stroke: #000;
+	  stroke-opacity: 1;
+	}	
+	body {
+		background-color: #f6f2ea;
+	}
+	</style>
+</head>   
+<body>
+	<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+	<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+
+	<script>
+	
+	var width = 960,
+	    height = 800;
+	
+	// add colorBrewer later
+	var color = d3.scale.category20();
+	//var color = d3.scale.category10();
+
+	var colorGrey = d3.scale.ordinal()
+	    .domain(1,9)
+	    .range(colorbrewer.Greys[9]);
+
+	var color = d3.scale.ordinal()
+	    //.domain(1,5)
+	    .range(colorbrewer.PRGn[5]);
+	    
+	var force = d3.layout.force()
+	    .charge(-500)
+	    .linkDistance(90)
+	    .size([width, height]);
+	
+	var svg = d3.select("body").append("svg")
+	    .attr("width", width)
+	    .attr("height", height);
+	    
+	var radius = d3.scale.log()
+		// input value range
+		.domain([1,300])
+		//output range
+		.range([1,20]);    
+	
+	d3.json("json/personen.json", function(error, graph) {
+	  force
+	      .nodes(graph.nodes)
+	      .links(graph.links)
+	      .start();
+	
+	  var link = svg.selectAll(".link")
+	      .data(graph.links)
+	    .enter().append("line")
+	      .attr("class", function(d) {if(d.type == 0) return "link"; else if(d.type == 1) return "link-base"; })
+	      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+	
+	  var node = svg.selectAll(".node")
+	      .data(graph.nodes)
+	    .enter().append("circle")
+	      .attr("class", function(d) { if(d.probe == 1 && d.type == 0) return "node-probe"; else if(d.probe == 0 && d.type == 0) return "node"; else if(d.type == -1) return "node-probe"; else return "node-clear"; })
+	      .attr("r", function(d) { return radius(d.size); })
+	      .style("fill", function(d) { if(d.type == 1) return colorGrey(d.group); else if(d.type == 0) return color(d.group); else return "#dcd3ad " })
+	      .call(force.drag);
+	
+	  var labels = svg.append("svg:g").selectAll("g")
+		  .data(graph.nodes)
+		  .enter().append("svg:g")
+	
+	  labels.append("svg:text")
+		  .attr("y",".31em")
+		  .attr("text-anchor", "middle")
+		  .text(function(d) { return (isNaN(d.name)) ? "" : d.name;})
+		  .attr("class", "label")
+	
+	
+	  node.append("title")
+	      .text(function(d) { return d.name; });
+	  	  
+	  force.on("tick", function() {
+	    link.attr("x1", function(d) { return d.source.x; })
+	        .attr("y1", function(d) { return d.source.y; })
+	        .attr("x2", function(d) { return d.target.x; })
+	        .attr("y2", function(d) { return d.target.y; });
+	
+	    node.attr("cx", function(d) { return d.x; })
+	        .attr("cy", function(d) { return d.y; });
+	  });
+	});
+	
+	</script>
+	</body>
+</html>
