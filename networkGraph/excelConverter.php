@@ -16,6 +16,83 @@ date_default_timezone_set('Europe/London');
 /** Include PHPExcel */
 require_once dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php';
 
+function get_keys_for_duplicate_double_values($my_arr, $my_keys) {
+    $firstEntry = true;
+    $output_arr = array();
+    //var_dump($my_keys);
+    foreach($my_arr as $my_nodes) {
+        //print_r($my_nodes);
+        //{ ["person"]=> string(10) "GeymÃ¼ller" ["excel_id"]=> int(6226) ["object"]=> string(25) "Tuscheskizzen mit Notizen" ["value"]=> int(1) ["type"]=> int(0) }
+        // target -> object ->
+        // source -> person
+        //var_dump($my_nodes);
+        $hasPerson = false;
+        foreach ($my_nodes as $key => $val) {
+            $newId = false;
+            $out_array_nodes = array();
+
+            if($firstEntry){
+                if($key == $my_keys[0]) {
+                    $thePerson = $val;
+                }
+                if($key == $my_keys[1]) {
+                    $out_array_nodes['person'] = $thePerson;
+                    $out_array_nodes['object'] = $val;
+                    $out_array_nodes['value'] = 1;
+                    array_push($output_arr, $out_array_nodes);
+                    $firstEntry = false;
+                }
+
+            } else {
+
+                //echo("check for person");
+                if($key == $my_keys[0]) {
+                    //echo($my_keys[0].": ".$val);
+                    foreach ($output_arr as $out_nodes) {
+                        if (isset($out_nodes[$my_keys[0]]) && $out_nodes[$my_keys[0]] == $val) {
+                            //person schon vorhanden
+                            $hasPerson = true;
+                        }
+                    }
+                    //echo($thePerson);
+                    $thePerson = $val;
+                }
+                // check for object
+                if($key == $my_keys[1]) {
+                    //echo($out_array_nodes['object']);
+                    //echo(count($output_arr));
+                    for($i = 0; $i < count($output_arr); $i++) {
+                        if (isset($output_arr[$i][$my_keys[1]]) && $output_arr[$i][$my_keys[1]] == $val) {
+                            //object schon vorhanden check person
+                            if ($hasPerson) {
+                                //Es gibt die Person zu diesem Object schon
+                                //$out_array_nodes['person'] = $thePerson;
+                                //$out_array_nodes['object'] = $val;
+                                $output_arr[$i]['value'] = intval($output_arr[$i]['value']+1);
+
+                            } else {
+                                 //echo("Object without Person, counts but no links<br>");
+                            }
+                        } else if (isset($output_arr[$i][$my_keys[1]])) {
+                            // there is no person-object combination
+                            $out_array_nodes['person'] = $thePerson;
+                            $out_array_nodes['object'] = $val;
+                            $out_array_nodes['value'] = intval(1);
+                            $newId = true;
+                            //print_r($out_array_nodes);
+                        }
+
+                    }
+                    ($newId) ? array_push($output_arr, $out_array_nodes) : null ;
+                }
+            }
+
+        }
+
+    }
+    return $output_arr;
+}
+
 
 function get_keys_for_duplicate_values($my_arr, $my_key, $get_key_list = false)
 {
@@ -261,12 +338,13 @@ foreach( $arrayData["Tabelle1"] as $r ) {
 }
 echo '</table>';
 
-// ----- TO DO -----------------
 
 // build the links
-// reduce $jsonArrayPLinkO to source - target - size
-var_dump(get_keys_for_duplicate_values($jsonArrayPLinkO, 'person object');
-// build the links from that.
+// reduce $jsonArrayPLinkO to person - object - size
+$thePLinkO_values = array("person", "object");
+var_dump(get_keys_for_duplicate_double_values($jsonArrayPLinkO, $thePLinkO_values));
+// ----- TO DO -----------------
+// build the links from that.  target - source - value - type
 
 foreach(get_keys_for_duplicate_values($jsonArray, 'name') as $node) {
     $jsonArrayLinkObjekt = array();

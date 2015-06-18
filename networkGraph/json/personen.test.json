@@ -1,0 +1,30 @@
+{"nodes":[
+{"id":7690,"type":1,"name":"Fotografie von Adler","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7691,"type":1,"name":"Bleistfitskizzen Architektur","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7692,"type":1,"name":"Bleisiftskizzen Architektur","group":0,"size":5,"probe":0,"thema":"-"},
+{"id":7693,"type":1,"name":"Bleistiftskizzen mit Bemessungen","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7694,"type":1,"name":"Notizen mit Skizze (Architektur)","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7695,"type":0,"name":"Bleisiftskizzen Architektur (mit Notizen)","group":0,"size":3,"probe":0,"thema":"-"},
+{"id":7700,"type":0,"name":"Bleisiftskizzen ","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7701,"type":0,"name":"Zeitungsausschnitt The Building News","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7702,"type":0,"name":"Tuscheskizzen Architektur","group":0,"size":3,"probe":0,"thema":"-"},
+{"id":7703,"type":0,"name":"Tuscheskizze Architektur Grundriss","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7705,"type":0,"name":"Tuscheskizze Architektur","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":7707,"type":0,"name":"Bleisiftskizze Grundriss auf Transparentpapier","group":0,"size":1,"probe":0,"thema":"-"},
+{"id":0,"type":-1,"name":"Geymueller","group":0,"size":1,"probe":0,"thema":"-"}],
+  "links":[
+    {"source":7707,"target":7690,"value":2, "type":0},
+    {"source":7705,"target":7690,"value":12, "type":0},
+    {"source":7703,"target":7691,"value":1, "type":0},
+    {"source":7700,"target":7691,"value":2, "type":0},
+    {"source":7702,"target":7691,"value":3, "type":0},
+    {"source":7700,"target":7692,"value":6, "type":0},
+    {"source":7695,"target":7693,"value":2, "type":0},
+    {"source":7695,"target":7694,"value":8, "type":0},
+    {"source":7690,"target":0,"value":20, "type":1},
+    {"source":7691,"target":0,"value":14, "type":1},
+    {"source":7692,"target":0,"value":45, "type":1},
+    {"source":7693,"target":0,"value":55, "type":1},
+    {"source":7694,"target":0,"value":28, "type":1}
+  ]
+}
