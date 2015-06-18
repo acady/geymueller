@@ -47,7 +47,7 @@ function searchString($string, $search) {
 		//var_dump($pos);
 	}
 	// check if Array is empty
-	var $pos = array_filter($pos);
+	$pos = array_filter($pos);
 	if (!empty($pos)) {
 		return true;
 	} else {
