@@ -47,7 +47,7 @@ function searchString($string, $search) {
 		//var_dump($pos);
 	}
 	// check if Array is empty
-	$pos = array_filter($pos);
+	var $pos = array_filter($pos);
 	if (!empty($pos)) {
 		return true;
 	} else {
@@ -138,8 +138,8 @@ require_once dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php';
 echo date('H:i:s') , " Load workbook from Excel2007 file" , EOL;
 $callStartTime = microtime(true);
 
-$input_file_name = "Intvent_final_21052015_m";
-$excelFile = "../data/".$input_file_name.".xlsx";
+$input_file_name = "Intvent_final_18062015";
+$excelFile = "../data/christoph/".$input_file_name.".xlsx";
 
 
 $objReader = PHPExcel_IOFactory::createReader('Excel2007');
