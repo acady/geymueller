@@ -342,9 +342,7 @@ echo '</table>';
 // build the links
 // reduce $jsonArrayPLinkO to person - object - size
 $thePLinkO_values = array("person", "object");
-var_dump(get_keys_for_duplicate_double_values($jsonArrayPLinkO, $thePLinkO_values));
-// ----- TO DO -----------------
-// build the links from that.  target - source - value - type
+
 
 foreach(get_keys_for_duplicate_values($jsonArray, 'name') as $node) {
     $jsonArrayLinkObjekt = array();
@@ -381,6 +379,38 @@ foreach ($arr as $key => $value) {
 */
 // build the final array
 $json['nodes'] = get_keys_for_duplicate_values($jsonArray, 'name');
+
+//var_dump($jsonLinks);
+//var_dump(get_keys_for_duplicate_double_values($jsonArrayPLinkO, $thePLinkO_values));
+// ----- TO DO -----------------
+// build the links from that.  target - source - value - type
+// aufpassen dass die target und source die Stelle im ersten array sind.
+
+$nodes_counter = 0;
+$jsonArrayPLinkO_converted = get_keys_for_duplicate_double_values($jsonArrayPLinkO, $thePLinkO_values);
+foreach($json['nodes'] as $nodes){
+    //var_dump($nodes['name']);
+    // loop through the link array
+    $link_counter = 0;
+    foreach($jsonArrayPLinkO_converted as $links){
+        if($links['person'] == $nodes['name']){
+            $jsonArrayPLinkO_converted[$link_counter]['target'] = $nodes_counter;
+        }
+        if($links['object'] == $nodes['name']){
+            $jsonArrayPLinkO_converted[$link_counter]['source'] = $nodes_counter;
+        }
+        $link_counter++;
+    }
+    $nodes_counter++;
+}
+//var_dump($jsonArrayPLinkO_converted);
+
+// push to links array
+foreach($jsonArrayPLinkO_converted as $addLinks){
+    $addLinks_push = array('source' => $addLinks['source'], 'target' => $addLinks['target'], 'value' => $addLinks['value'], 'type' => 0);
+    array_push($jsonLinks, $addLinks_push);
+}
+var_dump($jsonLinks);
 $json['links'] = $jsonLinks;
 
 /*

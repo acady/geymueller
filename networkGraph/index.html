@@ -45,7 +45,7 @@
 
 	<script>
 	
-	var width = 1600,
+	var width = 1900,
 	    height = 1000;
 	
 	// add colorBrewer later
@@ -61,8 +61,14 @@
 	    .range(colorbrewer.PRGn[5]);
 	    
 	var force = d3.layout.force()
-	    .charge(-500)
-	    .linkDistance(60)
+	    .charge(-150)
+        .chargeDistance(250)
+	    .linkDistance(40)
+        .linkStrength(0.1)
+        .friction(0.9)
+        .gravity(0.1)
+        .theta(0.8)
+        .alpha(0.1)
 	    .size([width, height]);
 	
 	var svg = d3.select("body").append("svg")
@@ -74,7 +80,7 @@
 		.domain([1,300])
 		//output range
 		// des
-		.range([1,20]);    
+		.range([5,30]);
 	
 	d3.json("json/personen.json", function(error, graph) {
 	    //console.log(graph.nodes);
