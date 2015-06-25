@@ -105,7 +105,8 @@ while (($csv_val = fgetcsv($file, 2000, ";")) !== FALSE) {
 	  
 	  // auf Italien und D/A/CH/F einschränken	  
 	  // this is for all known cites	  
-	  
+
+      /*
 	  //if($country == "IT" || $country == "AT" || $country == "DE" || $country == "FR" || $country == "CH"){
 		  $city_names_alternatives = array();	  
 		  $city_names_alternatives = explode(',', $csv_val[3]);
@@ -115,7 +116,7 @@ while (($csv_val = fgetcsv($file, 2000, ";")) !== FALSE) {
 			  	array_push($cities, utf8_decode($city));	  
 			  }
 		  }
-	  //}
+	  //} */
   } 
   //echo('<br>');
 }
