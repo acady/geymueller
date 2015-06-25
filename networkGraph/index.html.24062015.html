@@ -72,11 +72,7 @@
         .theta(0.8)
         .alpha(0.1)
 	    .size([width, height]);
-            //.on("tick", tick);
-
-    var drag = force.drag()
-            .on("dragstart", dragstart);
-
+	
 	var svg = d3.select("body").append("svg")
 	    .attr("width", width)
 	    .attr("height", height);
@@ -96,10 +92,8 @@
 	      .nodes(graph.nodes)
 	      .links(graph.links)
 	      .start();
-
-
-
-        var link = svg.selectAll(".link")
+	
+	  var link = svg.selectAll(".link")
 	      .data(graph.links)
 	    .enter().append("line")
 	      .attr("class", function(d) {if(d.type == 0) return "link"; else if(d.type == 1) return "link-base"; })
@@ -111,8 +105,7 @@
 	      .attr("class", function(d) { if(d.probe == 1 && d.type == 0) return "node-probe"; else if(d.probe == 0 && d.type == 0) return "node"; else if(d.type == -1) return "node-probe"; else return "node-clear"; })
 	      .attr("r", function(d) { return radius(d.size); })
 	      .style("fill", function(d) { if(d.type == 1) return colorGrey(d.group); else if(d.type == 0) return color(d.group); else return "#dcd3ad " })
-              .on("dblclick", dblclick)
-              .call(force.drag);
+	      .call(force.drag);
 	
 	  var labels = svg.append("svg:g").selectAll("g")
 		  .data(graph.nodes)
@@ -127,7 +120,7 @@
 	
 	  node.append("title")
 	      .text(function(d) { return d.name; });
-
+	  	  
 	  force.on("tick", function() {
 	    link.attr("x1", function(d) { return d.source.x; })
 	        .attr("y1", function(d) { return d.source.y; })
@@ -136,29 +129,9 @@
 	
 	    node.attr("cx", function(d) { return d.x; })
 	        .attr("cy", function(d) { return d.y; });
-
 	  });
-
 	});
-    /*
-    function tick() {
-        link.attr("x1", function(d) { return d.source.x; })
-                .attr("y1", function(d) { return d.source.y; })
-                .attr("x2", function(d) { return d.target.x; })
-                .attr("y2", function(d) { return d.target.y; });
-
-        node.attr("cx", function(d) { return d.x; })
-                .attr("cy", function(d) { return d.y; });
-    }
-    */
-    function dblclick(d) {
-        d3.select(this).classed("fixed", d.fixed = false);
-    }
-
-
-    function dragstart(d) {
-        d3.select(this).classed("fixed", d.fixed = true);
-    }
+	
 	</script>
 	</body>
 </html>

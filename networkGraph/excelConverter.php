@@ -16,6 +16,11 @@ date_default_timezone_set('Europe/London');
 /** Include PHPExcel */
 require_once dirname(__FILE__) . '/../Classes/PHPExcel/IOFactory.php';
 
+// Global varialbes
+ $simpleView = true;
+
+
+
 function get_keys_for_duplicate_double_values($my_arr, $my_keys) {
     $firstEntry = true;
     $output_arr = array();
@@ -277,17 +282,24 @@ foreach( $arrayData["Tabelle1"] as $r ) {
                 echo '<td>'.( (!empty($r[$i])) ? utf8_decode($r[$i]) : '&nbsp;' ).'</td>';
                 $objPHPExcel_Output->setActiveSheetIndex(0)
                     ->setCellValue($cell_names[$i].$line_number, $r[$i]);
+                // these are the Objects
                 if($r[$i] && $i == 2){
                     //$jsonArrayNodeObjekt['id'] = intval($r[$i-1]);
                     $jsonArrayNodeObjekt['excel_id'] = intval($r[$i-1]);
                     $jsonArrayNodeObjekt['type'] = 1;
-                    $jsonArrayNodeObjekt['name'] = $r[$i];
+                    if($simpleView){
+                        $simpleObject = explode(" ", $r[$i]);
+                        $jsonArrayNodeObjekt['name'] = $simpleObject[0];
+                    } else {
+                        $jsonArrayNodeObjekt['name'] = $r[$i];
+                    }
                     $jsonArrayNodeObjekt['group'] = 0;
                     $jsonArrayNodeObjekt['size'] = 0;
                     $jsonArrayNodeObjekt['probe'] = 0;
                     $jsonArrayNodeObjekt['thema'] = "";//$r[$i+1];  // the value is from $r[3]
                     $hjsonO = true;
                 }
+                // here we have the persons
                 if($r[$i] && $i == 5){
                     //$jsonArrayNodePerson['id'] = intval($r[$i-4])-6000;
                     $jsonArrayNodePerson['excel_id'] = intval($r[$i-4])-6000;
@@ -410,7 +422,7 @@ foreach($jsonArrayPLinkO_converted as $addLinks){
     $addLinks_push = array('source' => $addLinks['source'], 'target' => $addLinks['target'], 'value' => $addLinks['value'], 'type' => 0);
     array_push($jsonLinks, $addLinks_push);
 }
-var_dump($jsonLinks);
+//var_dump($jsonLinks);
 $json['links'] = $jsonLinks;
 
 /*
