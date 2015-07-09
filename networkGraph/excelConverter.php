@@ -142,7 +142,7 @@ function get_keys_for_duplicate_values($my_arr, $my_key, $get_key_list = false)
                 $my_nodes['size'] = 1;
                 $my_nodes['id'] = intval(count($output_arr));
                 if(intval(count($output_arr)) == 0){
-                    $my_nodes['size'] = 200;    // size for the root node
+                    $my_nodes['size'] = 2;    // size for the root node
                 }
             }
 
@@ -173,7 +173,7 @@ function get_keys_for_duplicate_values($my_arr, $my_key, $get_key_list = false)
 echo date('H:i:s') , " Load workbook from Excel2007 file" , "<br>";
 $callStartTime = microtime(true);
 
-$input_file_name = "Sichtungs-Fotografien_18062015_s";
+$input_file_name = "Sichtungs-Fotografien_18062015";
 $excelFile = "../data/pia/".$input_file_name.".xlsx";
 
 
@@ -219,7 +219,7 @@ $jsonArrayNodeObjekt['id'] = 0;
 $jsonArrayNodeObjekt['type'] = -1;
 $jsonArrayNodeObjekt['name'] ='Geymueller';
 $jsonArrayNodeObjekt['group'] = 0;
-$jsonArrayNodeObjekt['size'] = 200;
+$jsonArrayNodeObjekt['size'] = 2;
 $jsonArrayNodeObjekt['probe'] = 1;
 $jsonArrayNodeObjekt['thema'] = '';  // the value is from $r[3]
 
