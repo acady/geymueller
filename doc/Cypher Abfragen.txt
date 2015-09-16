@@ -1,0 +1,59 @@
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine
+MERGE (o:Objekt { name: csvLine.OBJEKT })
+CREATE (i:Inventar { invnr: csvLine.INVNR , beschriftung: csvLine.BESCHRIFTUNG , inhalt: csvLine.INHALT , material: csvLine.MATERIAL, person: csvLine.PERSON, objekt: csvLine.OBJEKT, id: csvLine.ID, zeit: csvLine.ZEIT, raum: csvLine.RAUM})
+CREATE (i)-[:TYP_OF]->(o)
+
+
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.PERSON IS NOT NULL 
+MERGE (p:Person { name: csvLine.PERSON })
+RETURN p
+
+
+match (a:Person), (b:Inventar) where a.name = b.person create (a)-[r:CONNECTED]->(b) return r
+
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.ZEIT IS NOT NULL 
+MERGE (z:Zeit { name: csvLine.ZEIT })
+RETURN z
+
+
+match (a:Zeit), (b:Inventar) where a.name = b.zeit create (a)-[r:TIME_OF]->(b) return r
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.RAUM IS NOT NULL 
+MERGE (r:Raum { name: csvLine.RAUM })
+RETURN r
+
+
+match (a:Raum), (b:Inventar) where a.name = b.raum create (a)-[r:AT_PLACE]->(b) return r
+
+
+
+MATCH (n)
+OPTIONAL MATCH (n)-[r]-()
+DELETE n,r
+
+
+
+
+
+CREATE (i)-[:CONNECTED]->(p)
+
+
+RETURN csvLine.PERSON
+
+CREATE (i)-[:TYP_OF]->(p) CREATE (i)-[:CONNECTED]->(p)
+
+
+MATCH (p:Person {person})
+
+
+CREATE INDEX ON :Person(name)
+CREATE INDEX ON :Inventar(person)
+
+
+MATCH (a:Person),(b:Inventar)
+WHERE a.name = b.person 
+CREATE (a)-[r:CONNECTED]->(b)
+RETURN r
+
