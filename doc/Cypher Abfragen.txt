@@ -1,3 +1,6 @@
+Jetzt durchgehen: 
+
+
 1. Beistriche durch ein supersonderzeichen ersetzen !&%! dann die Strichpunkte zu Beistrichen machen 
 oder mit "" separieren oder was auch immer 
 
