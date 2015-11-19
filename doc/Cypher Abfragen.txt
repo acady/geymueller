@@ -1,6 +1,9 @@
-LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine
+1. Beistriche durch ein supersonderzeichen ersetzen !&%! dann die Strichpunkte zu Beistrichen machen 
+oder mit "" separieren oder was auch immer 
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.OBJEKT IS NOT NULL
 MERGE (o:Objekt { name: csvLine.OBJEKT })
-CREATE (i:Inventar { invnr: csvLine.INVNR , beschriftung: csvLine.BESCHRIFTUNG , inhalt: csvLine.INHALT , material: csvLine.MATERIAL, person: csvLine.PERSON, objekt: csvLine.OBJEKT, id: csvLine.ID, zeit: csvLine.ZEIT, raum: csvLine.RAUM})
+CREATE (i:Inventar { invnr: csvLine.INVNR , bezeichnung: csvLine.BEZEICHNUNG , inhalt: csvLine.INHALT_DARGESTELLT , material: csvLine.MATERIAL, technik: csvLine.TECHNIK, masze: csvLine.MAßE, person: csvLine.PERSON, objekt: csvLine.OBJEKT, id: csvLine.ID, zeit: csvLine.ZEIT, raum: csvLine.RAUM, sp: csvLine.SP})
 CREATE (i)-[:TYP_OF]->(o)
 
 
@@ -9,25 +12,149 @@ LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/daten
 MERGE (p:Person { name: csvLine.PERSON })
 RETURN p
 
+MATCH (a:Person), (b:Inventar) where a.name = b.person create (a)-[r:CONNECTED]->(b) return r
 
-match (a:Person), (b:Inventar) where a.name = b.person create (a)-[r:CONNECTED]->(b) return r
-
+// -> OBJEKT_ZEIT wird ZEIT !
 
 LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.ZEIT IS NOT NULL 
 MERGE (z:Zeit { name: csvLine.ZEIT })
 RETURN z
 
 
-match (a:Zeit), (b:Inventar) where a.name = b.zeit create (a)-[r:TIME_OF]->(b) return r
+MATCH (a:Zeit), (b:Inventar) where a.name = b.zeit create (a)-[r:TIME_OF]->(b) return r
 
-LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.RAUM IS NOT NULL 
-MERGE (r:Raum { name: csvLine.RAUM })
+// der Ort ist im Geymueller Archiv
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.ORT IS NOT NULL 
+MERGE (r:Ort { name: csvLine.ORT })
+RETURN r
+MATCH (a:Raum), (b:Inventar) where a.name = b.raum create (a)-[r:AT_PLACE]->(b) return r
+
+// create the nodes that belong to the inventars
+
+CREATE (w:Werk {type: "Werk", name: "SP", beschreibung: "St. Peter"})
+CREATE (n:Werk {type: "Werk", name: "Th", beschreibung: "Thesaurus"})
+CREATE (m:Werk {type: "Werk", name: "B", beschreibung: "Bramante"})
+CREATE (o:Werk {type: "Werk", name: "S", beschreibung: "Sonstiges"})
+CREATE (p:Werk {type: "Werk", name: "Rac", beschreibung: "Raccolto"})
+CREATE (q:Werk {type: "Werk", name: "Dmpf", beschreibung: "Denkmalpflege"})
+CREATE (r:Werk {type: "Werk", name: "L", beschreibung: "Leonardo da Vinci"})
+CREATE (s:Werk {type: "Werk", name: "Mich", beschreibung: "Michelangelo"})
+CREATE (t:Werk {type: "Werk", name: "Raf", beschreibung: "Raffael"})
+CREATE (u:Werk {type: "Werk", name: "HK", beschreibung: "Hohkönigsburg"})
+CREATE (v:Werk {type: "Werk", name: "DC", beschreibung: "Du Cercau"})
+CREATE (x:Werk {type: "Werk", name: "Rf", beschreibung: "Renaissance in Frankreich"})
+CREATE (y:Werk {type: "Werk", name: "T", beschreibung: "Toskanawerk"})
+
+// connect the Nodes with the Inventars
+/*
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine 
+CREATE (i0:Inventar { invnr: csvLine.INVNR , bezeichnung: csvLine.BEZEICHNUNG , inhalt: csvLine.INHALT_DARGESTELLT , material: csvLine.MATERIAL, technik: csvLine.TECHNIK, masze: csvLine.MAßE, person: csvLine.PERSON, objekt: csvLine.OBJEKT, id: csvLine.ID, zeit: csvLine.ZEIT, raum: csvLine.RAUM, sp: csvLine.SP})
+//MERGE (i:Inventar {invnr: csvLine.INVNR})
+MATCH (i:Inventar), (w:Werk)
+CREATE (i {sp: "x"})-[:DEDICATED_TO]->(w {name: "SP"})
+*/
+
+
+// Thematische Zuordnung festlegen 
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine 
+CREATE (i:Inventar { invnr: csvLine.INVNR , bezeichnung: csvLine.BEZEICHNUNG , inhalt: csvLine.INHALT_DARGESTELLT , material: csvLine.MATERIAL, technik: csvLine.TECHNIK, masze: csvLine.MASZE, person: csvLine.PERSON, objekt: csvLine.OBJEKT, id: csvLine.ID, zeit: csvLine.ZEIT, raum: csvLine.RAUM, sp: csvLine.SP, th: csvLine.Th, b: csvLine.B, s: csvLine.S, rac: csvLine.Rac, dmpf: csvLine.Dmpf, l: csvLine.L, mich: csvLine.Mich, raf: csvLine.Raf, hk: csvLine.HK, dc: csvLine.DC, rf: csvLine.Rf, t: csvLine.T})  
+
+MATCH (i1:Inventar), (w1:Werk)
+WHERE i1.sp = "x" AND w1.name = "SP"
+CREATE (i1)-[r:DEDICATED_TO]->(w1)
+WITH i1 AS i1
+MATCH (i2:Inventar), (w2:Werk)
+WHERE i2.th = "x" AND w2.name = "Th"
+CREATE (i2)-[r:DEDICATED_TO]->(w2)
+WITH i2 AS i2
+PROFILE
+MATCH (i3:Inventar), (w3:Werk)
+WHERE i3.b = "x" AND w3.name = "B"
+CREATE (i3)-[r:DEDICATED_TO]->(w3)
+PROFILE
+MATCH (i4:Inventar)  , (w4:Werk)
+WHERE i4.s = "x" AND w4.name = "S"
+CREATE (i4)-[r:DEDICATED_TO]->(w4)
+WITH i4 AS i4
+MATCH (i5:Inventar), (w5:Werk)
+WHERE i5.rac = "x" AND w5.name = "RAC"
+CREATE (i5)-[r:DEDICATED_TO]->(w5)
+WITH i5 AS i5
+MATCH (i6:Inventar), (w6:Werk)
+WHERE i6.dmpf = "x" AND w6.name = "Dmpf"
+CREATE (i6)-[r:DEDICATED_TO]->(w6)
+WITH i6 AS i6
+MATCH (i7:Inventar), (w7:Werk)
+WHERE i7.l = "x" AND w7.name = "L"
+CREATE (i7)-[r:DEDICATED_TO]->(w7)
+WITH i7 AS i7
+MATCH (i8:Inventar), (w8:Werk)
+WHERE i8.mich = "x" AND w8.name = "Mich"
+CREATE (i8)-[r:DEDICATED_TO]->(w8)
+WITH i8 AS i8
+MATCH (i9:Inventar), (w9:Werk)
+WHERE i9.raf = "x" AND w9.name = "Raf"
+CREATE (i9)-[r:DEDICATED_TO]->(w9)
+WITH i9 AS i9
+MATCH (i10:Inventar), (w10:Werk)
+WHERE i10.hk = "x" AND w10.name = "HK"
+CREATE (i10)-[r:DEDICATED_TO]->(w10)
+WITH i10 AS i10
+MATCH (i11:Inventar), (w11:Werk)
+WHERE i11.dc = "x" AND w11.name = "DC"
+CREATE (i11)-[r:DEDICATED_TO]->(w11)
+WITH i11 AS i11
+MATCH (i12:Inventar), (w12:Werk)
+WHERE i12.rf = "x" AND w12.name = "Rf"
+CREATE (i12)-[r:DEDICATED_TO]->(w12)
+WITH i12 AS i12
+MATCH (i13:Inventar), (w13:Werk)
+WHERE i13.t = "x" AND w13.name = "T"
+CREATE (i13)-[r:DEDICATED_TO]->(w13)
+
 RETURN r
 
 
-match (a:Raum), (b:Inventar) where a.name = b.raum create (a)-[r:AT_PLACE]->(b) return r
+match (I:Inventar {sp: "x"}), (W:werk {name: "SP"}) return I,W
+
+// REFERENZEN -> achtung da müssten wir auch mergen, geht aber nicht weil wir bei z.b. personen nix drinnen stehen haben. 
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.REFERENZ_Bezeichung_1 IS NOT NULL
+CREATE (ref1:Referenz_1 { bezeichnung: csvLine.REFERENZ_Bezeichung_1 , ebene: csvLine.REFERENZ_Ebene_1 , beziehung: csvLine.REFERENZ_Beziehung_1 , zeit: csvLine.REFERENZ_Zeit_1, ort: csvLine.REFERENZ_Ort_1, person: csvLine.REFERENZ_Person_1, inventar: csvLine.INVNR})
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.REFERENZ_Bezeichung_2 IS NOT NULL
+CREATE (ref2:Referenz_2 { bezeichnung: csvLine.REFERENZ_Bezeichung_2 , ebene: csvLine.REFERENZ_Ebene_2 , beziehung: csvLine.REFERENZ_Beziehung_2 , zeit: csvLine.REFERENZ_Zeit_2, ort: csvLine.REFERENZ_Ort_2, person: csvLine.REFERENZ_Person_2, inventar: csvLine.INVNR})
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.REFERENZ_Bezeichung_3 IS NOT NULL
+CREATE (ref3:Referenz_3 { bezeichnung: csvLine.REFERENZ_Bezeichung_3 , ebene: csvLine.REFERENZ_Ebene_3 , beziehung: csvLine.REFERENZ_Beziehung_3 , zeit: csvLine.REFERENZ_Zeit_3, ort: csvLine.REFERENZ_Ort_3, person: csvLine.REFERENZ_Person_3, inventar: csvLine.INVNR})
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.REFERENZ_Bezeichung_4 IS NOT NULL
+CREATE (ref4:Referenz_4 { bezeichnung: csvLine.REFERENZ_Bezeichung_4 , ebene: csvLine.REFERENZ_Ebene_4 , beziehung: csvLine.REFERENZ_Beziehung_4 , zeit: csvLine.REFERENZ_Zeit_4, ort: csvLine.REFERENZ_Ort_4, person: csvLine.REFERENZ_Person_4, inventar: csvLine.INVNR})
+
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.REFERENZ_Bezeichung_5 IS NOT NULL
+CREATE (ref5:Referenz_5 { bezeichnung: csvLine.REFERENZ_Bezeichung_5 , ebene: csvLine.REFERENZ_Ebene_5 , beziehung: csvLine.REFERENZ_Beziehung_5 , zeit: csvLine.REFERENZ_Zeit_5, ort: csvLine.REFERENZ_Ort_5, person: csvLine.REFERENZ_Person_5, inventar: csvLine.INVNR})
 
 
+
+MATCH (i1:Inventar), (r1:Referenz_1)
+WHERE i1.invnr = r1.inventar
+CREATE (i1)-[c:FIRST_REFERENCE]->(r1)
+
+MATCH (r1:Referenz_1), (r2:Referenz_2)
+WHERE r1.inventar = r2.inventar
+CREATE (r1)-[c:CONNECTED_REFERENCE]->(r2)
+
+MATCH (r1:Referenz_2), (r2:Referenz_3)
+WHERE r1.inventar = r2.inventar
+CREATE (r1)-[c:CONNECTED_REFERENCE]->(r2)
+
+MATCH (r1:Referenz_3), (r2:Referenz_4)
+WHERE r1.inventar = r2.inventar
+CREATE (r1)-[c:CONNECTED_REFERENCE]->(r2)
+
+
+
+// DELETE 
 
 MATCH (n)
 OPTIONAL MATCH (n)-[r]-()
@@ -36,8 +163,7 @@ DELETE n,r
 
 
 
-
-CREATE (i)-[:CONNECTED]->(p)
+CREATiE (i)-[:CONNECTED]->(p)
 
 
 RETURN csvLine.PERSON

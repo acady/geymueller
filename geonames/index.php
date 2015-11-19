@@ -140,7 +140,7 @@ echo date('H:i:s') , " Load workbook from Excel2007 file" , EOL;
 $callStartTime = microtime(true);
 
 $input_file_name = "Intvent_final_18062015";
-$excelFile = "../data/christoph/".$input_file_name.".xlsx";
+$excelFile = "../data/christoph/alt/".$input_file_name.".xlsx";
 
 
 $objReader = PHPExcel_IOFactory::createReader('Excel2007');
