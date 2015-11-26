@@ -2,7 +2,7 @@ Jetzt durchgehen:
 
 
 1. Beistriche durch ein supersonderzeichen ersetzen !&%! dann die Strichpunkte zu Beistrichen machen 
-oder mit "" separieren oder was auch immer 
+und dann das Supersonderzeichen mit einem neuen Zeichen oder mit "" separieren oder was auch immer 
 
 LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.OBJEKT IS NOT NULL
 MERGE (o:Objekt { name: csvLine.OBJEKT })
