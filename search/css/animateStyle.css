@@ -1,0 +1,30 @@
+.animate-repeat {
+  /*line-height:40px;*/
+  list-style:none;
+  box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  /*transition:all linear 1s;*/
+  -webkit-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+  /*max-height:40px;*/
+}

@@ -1,0 +1,40 @@
+.btn {
+    border-radius: 0px;
+    height: auto;
+    background-color: #fdfdfd;
+    /*border: 1px solid gray;*/
+}
+
+a {
+	color: #ed5565;
+	text-decoration: none;
+}
+
+.panel-default>.panel-heading {
+	background-image: none;
+}
+
+.panel {
+	border-radius: 0px;
+	background-color: #fdfdfd;
+}
+
+.panel-pagination {
+    margin: 8px 0 0 0 !important;
+    /*margin: 0 0 !important;*/
+}
+.panel-container {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    height:35px;
+}
+.abc{
+    height:35px;
+     display:table-cell !important;
+     vertical-align:middle;
+}
+
+.checkbox {
+    margin-left: 20px;
+    margin-right: 10px;
+}

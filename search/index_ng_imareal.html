@@ -1,0 +1,538 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+		<!-- CSS -->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
+		
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.ion.rangeslider/2.0.12/css/ion.rangeSlider.css">
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.ion.rangeslider/2.0.12/css/ion.rangeSlider.skinFlat.css">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap_custom.css">
+		
+		<link rel="stylesheet" href="css/animateStyle.css">
+
+		<!-- /CSS -->
+		
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+	    <div ng-app="app">
+	        <div ng-controller="ctrl">
+	            <!-- Header -->
+				<header>
+					<img src="img/instant_search_logo@2x.png"/>
+					<!--<input id="search-input" ng-model="cols" type="text" ng-change="makeArray()" />-->
+					<input id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" placeholder="Search by name, brand, description..."/>
+					<div id="search-input-icon"></div>
+
+				</header>
+				<!-- /Header -->
+				
+				
+				<!-- Main -->
+				<main>
+					<!-- Left Column -->
+					<div id="left-column">
+						<button type="button" class="btn btn-secondary" ng-click="popArray()">populate</button>
+						<hr>
+						<div id="facets"></div>
+					</div>
+					
+					<!-- Right Column -->
+					<div id="right-column">
+						<div ng-repeat="o in arr | reverse" class="animate-repeat">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="container-fluid panel-container">
+									    <div class="col-xs-2 text-left">
+									        <h4 class="panel-title abc">
+									            <i class="glyphicon glyphicon-th-large"></i>
+									            <i class="glyphicon glyphicon-th-list"></i>
+									            <i class="glyphicon glyphicon-th"></i>
+									        </h4>
+									    </div>
+									    <div class="col-xs-6 col-lg-6 text-center ">
+										    <div class="pagination panel-pagination" id="pagination"></div>
+										    <!--
+									        <ul class="pagination panel-pagination">
+										        
+									            <li>
+									              <a href="#" aria-label="Previous">
+									            <span aria-hidden="true">&laquo;</span>
+									              </a>
+									            </li>
+									            <li><a href="#">1</a></li>
+									            <li><a href="#">2</a></li>
+									            <li><a href="#">3</a></li>
+									            <li>
+									              <a href="#" aria-label="Next">
+									            <span aria-hidden="true">&raquo;</span>
+									              </a>
+									            </li>
+									          </ul>
+									          -->
+									    </div>
+									    <div class="col-xs-4  col-lg-4 text-right">
+									        <span class="panel-title btn-group">
+
+										        
+										        
+										        <!--
+										        
+										        <select class="selectpicker show-tick" data-style="btn btn-secondary">
+													<optgroup label="Picnic">
+														<option>Mustard</option>
+														<option>Ketchup</option>
+														<option>Relish</option>
+													</optgroup>
+													<optgroup label="Camping">
+														<option>Tent</option>
+														<option>Flashlight</option>
+														<option>Toilet Paper</option>
+													</optgroup>
+												</select>
+												-->	
+									            <!--
+									            <button ng-disabled="underCreation" type="button" class="btn btn-default btn-sm abc" ng-click="addUser()">
+									                <span class="glyphicon glyphicon-plus text-primary"></span>
+									                <span class="text-primary"><strong>Add</strong></span>
+									            </button>
+									            -->
+												<!--
+												<ol class = "breadcrumb">
+												   <li><a href = "#">The</a></li>
+												   <li><a href = "#">Basic</a></li>
+												   <li class = "active">Panel {{o}}</li>
+												</ol>
+												-->
+												<ul class="nav navbar-nav">
+													<li class="dropdown-thesaurus">
+													 <!--<button class="btn">Ergebnis</button>-->
+
+
+													<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Thessaurus
+													<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ergebnis-->
+													<span class="caret"></span></button><!--</a>-->
+													<ul class="dropdown-menu">
+														<li class="dropdown-header">private</li>
+														<li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Standort</label>
+															</div>
+														</li>
+														<li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Negativnummer</label>
+															</div>
+														</li>
+																												<li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Archivnummer</label>
+															</div>
+														</li>
+														<li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Diadetail</label>
+															</div>
+													    </li>
+													  <li class="divider"></li>
+													  <li class="dropdown-header">public</li>
+													  	<li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Handlung</label>
+															</div>
+													    </li>
+													    <li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Farbe</label>
+															</div>
+													    </li>
+													    <li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Ensemble</label>
+															</div>
+													    </li>
+													    <li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Form</label>
+															</div>
+													    </li>
+													    <li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Herkunft</label>
+															</div>
+													    </li>
+													    <li>
+															<div class="checkbox">
+																<label><input type="checkbox" value="">Quelle</label>
+															</div>
+													    </li>
+													</ul>
+													<li class="dropdown-iconclass">
+													 <!--<button class="btn">Ergebnis</button>-->
+
+
+													<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">iconClass
+													<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ergebnis-->
+													<span class="caret"></span></button><!--</a>-->
+													<ul class="dropdown-menu">
+													    <li class="dropdown-header">0 · Abstract, Non-representational Art</li>
+													     <li><a href="#">10 · (symbolic) representations ~ creation, cosmos, cosmogony, universe, and life (in the broadest sense)</a></li>
+														 <li><a href="#">11 · Christian religion</a></li>
+														<li class="dropdown-header">1 · Religion and Magic</li> 
+														<li class="dropdown-header">2 · Nature</li>
+														<li><a href="#">21 the four elements, and ether, the fifth element</a></li>
+														<li><a href="#">22 natural phenomena</a></li>
+														<li><a href="#">23 time</a></li>
+														<li><a href="#">24 the heavens (celestial bodies)</a></li>
+														<li><a href="#">25 earth, world as celestial body</a></li>
+														<li><a href="#">26 meteorological phenomena</a></li>
+														<li><a href="#">29 surrealia, surrealistic representations</a></li>
+														<li class="dropdown-header">3 · Human Being, Man in General</li>
+														<li class="dropdown-header">4 · Society, Civilization, Culture</li>
+														<li class="dropdown-header">5 · Abstract Ideas and Concepts</li>
+														<li class="dropdown-header">6 · History</li>
+														<li class="dropdown-header">7 · Bible</li>
+														<li class="dropdown-header">8 · Literature</li>
+														<li class="dropdown-header">9 · Classical Mythology and Ancient History</li>
+													</ul>
+													</li>
+													<li class="dropdown">
+													 <!--<button class="btn">Ergebnis</button>-->
+
+
+													<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Ergebnis
+													<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ergebnis-->
+													<span class="caret"></span></button><!--</a>-->
+													<ul class="dropdown-menu">
+													  <li class="dropdown-header">related</li>
+													  <li><a href="#" ng-click="popArray()">Browse</a></li>
+													  <li class="divider"></li>
+													  <li class="dropdown-header">word match</li>
+													  <li><a href="#" ng-click="popArray()">Ergebnis</a></li>
+													  <li><a href="#" ng-click="popArray()">Ergebnis (Gruppe/Facetten)</a></li>
+													  <li class="divider"></li>
+													  <li class="dropdown-header">refine</li>
+													  <li><a href="#">Experten</a></li> 
+													</ul>
+													</li>
+												</ul>
+												
+									        </span>
+									    </div>          
+									</div>          
+								</div>
+								<div class="panel-body"><!--A Basic Panel with number {{o}}-->
+								<!--<div id="pagination"></div>-->
+								<div class="searchMethod"></div>
+								<div id="sort-by">Sort by:
+									<select dir="rtl" id="sort-by-select">
+									  <option value="" selected>Most relevant</option>
+									  <option value="_price_asc">Earliest</option>
+									  <option value="_price_desc">Latest</option>
+									</select>
+									<span class="caret"></span>
+									</div>
+									<div id="stats"></div>
+									<div class="row">
+										<div id="hits"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+		    		</div>
+				</main>
+				<!-- /Main -->
+		
+		
+				<!-- Footer -->
+				<footer>
+				<!--
+				Source Code on <a href="http://github.com/algolia/instant-search-demo">Github</a> -
+				Powered by <a href="http://algolia.com">Algolia</a> - Data from <a href="https://developer.bestbuy.com">Best Buy</a>
+				-->
+				</footer>
+				<!-- /Footer -->
+			</div>
+	    </div>
+  
+  
+		<!-- Pagination template -->
+		<script type="text/template" id="pagination-template">
+			<ul>
+			  <li {{^prev_page}}class="disabled"{{/prev_page}}><a href="#" {{#prev_page}}class="go-to-page" data-page="{{ prev_page }}"{{/prev_page}}>&#60;</a></li>
+			  {{#pages}}
+			  <li class="{{#current}}active{{/current}} {{#disabled}}disabled{{/disabled}}"><a href="#" {{^disabled}} class="go-to-page" data-page="{{ number }}" {{/disabled}}>{{ number }}</a></li>
+			  {{/pages}}
+			  <li {{^next_page}}class="disabled"{{/next_page}}><a href="#" {{#next_page}}class="go-to-page" data-page="{{ next_page }}"{{/next_page}}>&#62;</a></li>
+			</ul>
+		</script>
+		
+		<!-- Hit template -->
+		<script type="text/template" id="hit-template">
+		{{#hits}}
+		<div class="col-md-3">
+		    <div class="hit">
+		      <div class="hit-image" data-toggle="modal" data-target="#{{ objectID }}">
+		        <img src="{{ image_path }}" alt="{{ objekt }}">
+		      </div>
+		      <!--
+		      <div class="hit-content">
+		        <h3 class="hit-price">${{ price }}</h3>
+		        <h2 class="hit-name">{{{ _highlightResult.bezeichnung.value }}}</h2>
+		        <p class="hit-description">{{{ _highlightResult.ensemble.value }}}</p>
+		      </div>
+		      -->
+		      <!-- Modal -->
+				<div id="{{ objectID }}" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+				
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="hit-name">{{{ _highlightResult.objekt.value }}}</h4>
+						<h3 class="hit-price">{{ ante }} - {{ post }}</h3>
+		
+				      </div>
+				      <div class="modal-body">
+					    <img class="hit-image-modal" src="{{ image_path_big }}" alt="{{ name }}">  
+				        <h2 class="hit-description">{{{ _highlightResult.beschreibung.value }}}</h2>
+						<!-- TABS in MODAL -->
+						<h2>
+						<ul class="nav nav-tabs">
+						  <li class="active"><a data-toggle="tab" href="#home-{{ objectID }}">{{objekt}}</a></li>
+						  <li><a data-toggle="tab" href="#menu1-{{ objectID }}">Lokalisierung</a></li>
+						  <li><a data-toggle="tab" href="#menu2-{{ objectID }}">Interne Angaben</a></li>
+						  <li class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu3-{{ objectID }}">Verknüpfungen
+						    <span class="caret"></span></a>
+						    <ul class="dropdown-menu">
+						      <li><a href="#">Personen</a></li>
+						      <li><a href="#">Handlungen</a></li>
+						      <li><a href="#">Literatur</a></li> 
+						    </ul>
+						  </li>
+						</ul>
+						
+						<div class="tab-content">
+						  <div id="home-{{ objectID }}" class="tab-pane fade in active">
+						    <h2>{{{ _highlightResult.metadaten.bildthema.comments.value }}}</h2>
+						    
+						    <p>{{ ensemble }}</p>
+						    <p>{{ objektgruppe }}</p>
+						    <p>{{ masze }}</p>
+
+						  </div>
+						  <div id="menu1-{{ objectID }}" class="tab-pane fade">
+						    <h2>Standort: {{ standort}}</h2>
+						    <p>{{ provenienz }}</p>
+						    <p>{{ institution }}</p>
+						    <p>{{ bundesland }}</p>
+						    <p>{{ staat }}</p>
+						    <p>{{ herkunft }}</p>
+
+						  </div>
+						  <div id="menu2-{{ objectID }}" class="tab-pane fade">
+						    <h2>Intern</h2>
+						    <p>{{ invnr }}</p>
+						    <p>Negativ: {{ negativnr }}</p>
+						    <p>Fol: {{ fol }}</p>
+						    <p>{{ archivnr }}</p>
+						  </div>
+						  <!--
+						  <div id="menu3-{{ objectID }}" class="tab-pane fade">
+						    <h2>Menu 3</h2>
+						    <p>Some content in menu 3. And the dropdown menu</p>
+						  </div>
+						  -->
+						</div>
+						</h2>
+						<hr>
+						<h4>Visueller Graph</h4>
+						<img src="img/neoBrowser.jpg" alt="Graph Darstellung"/ width="100%">
+						<!--
+						<h2><ul class="nav nav-tabs" id="tabContent">
+						    <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+						    <li><a href="#access-security" data-toggle="tab">Access / Security</a></li>
+						    <li><a href="#networking" data-toggle="tab">Networking</a></li>
+						</ul>
+						</h2>
+						
+						<div class="tab-content">
+							<h2>
+						    <div class="tab-pane active" id="details">Details tab
+						       <div class="control-group">
+						           <label class="control-label">Instance Name</label>
+						       </div>
+						    </div>
+						    <div class="tab-pane" id="access-security">content 0</div> 
+						    <div class="tab-pane" id="networking">content 1</div> 
+						    </h2>
+						</div>
+						-->
+						<!-- MODAL Ende -->
+				      </div>
+				      
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				
+				  </div>
+				</div>
+				<!-- END Modal -->
+		    </div>
+		</div>
+		{{/hits}}
+		</script>
+		
+		<!-- Stats template -->
+		<script type="text/template" id="stats-template">
+		{{ nbHits }} Result{{#nbHits_plural}}s{{/nbHits_plural}} <span class="found-in">Found in {{ processingTimeMS }}ms</span>
+		</script>
+		
+		<!-- Facet template -->
+		<script type="text/template" id="facet-template">
+		<div class="facet">
+		  <h5>{{ title }}</h5>
+		  <ul>
+		    {{#values}}
+		    <li>
+		      <a href="" class="facet-link toggle-refine {{#disjunctive}}facet-disjunctive{{/disjunctive}} {{#isRefined}}facet-refined{{/isRefined}}" data-facet="{{ facet }}" data-value="{{ name }}">
+		        {{ name }}<span class="facet-count">{{ count }}</span>
+		      </a>
+		    </li>
+		    {{/values}}
+		  </ul>
+		</div>
+		</script>
+		
+		<!-- Slider template -->
+		<script type="text/template" id="slider-template">
+		<div class="facet">
+		  <h5>{{ title }}</h5>
+		  <input type="text" id="{{ facet }}-slider" data-min="{{ min }}" data-max="{{ max }}" data-from="{{ from }}" data-to="{{ to }}"/>
+		</div>
+		</script>
+		
+		
+		
+		<!-- No-Results template -->
+		<script type="text/template" id="no-results-template">
+		<div id="no-results-message">
+		  <p>We didn't find any results for the search <em>"{{ query }}"</em>.</p>
+		  <ul>
+		    {{#filters}}
+		    <li class="{{ class }}" data-facet="{{ facet }}" data-value="{{ facet_value }}">
+		      {{ label }}<span class="value">{{ label_value }}</span><a class="remove"><img src="img/remove.svg"/></a>
+		    </li>
+		    {{/filters}}
+		    <br>
+		    <a href="" class='clear-all'>Clear all</a>
+		  </ul>
+		</div>
+		</script>
+
+		<!-- Javascript -->
+
+	
+
+		<script src="//cdn.jsdelivr.net/jquery/2.1.4/jquery.min.js"></script>
+		<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+		<script src="//cdn.jsdelivr.net/algoliasearch.helper/2/algoliasearch.helper.min.js"></script>
+		<script src="//cdn.jsdelivr.net/hogan.js/3.0.2/hogan.min.common.js"></script>
+		<script src="//cdn.jsdelivr.net/jquery.ion.rangeslider/2.0.12/js/ion.rangeSlider.min.js"></script>
+ 
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>			
+		
+		<script src="js/app.imareal.js"></script>
+		
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        
+
+        
+		<!-- Angular JS -->	
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+	    
+	    <script>
+		    var app = angular.module('app', ['ngAnimate']);
+	        //var app = angular.module('app', []);
+	        app.controller('ctrl', function ($scope) {
+	            $scope.cols = 0;
+	            $scope.arr = [];
+	            $scope.makeArray = function () {
+	                $scope.arr.length = 0;
+	                for (var i = 0; i < parseInt($scope.cols) ; i++) {
+	                    $scope.arr.push(i);
+	                }
+	            }
+	            $scope.popArray = function () {
+	                $scope.cols++;
+	                $scope.arr = [];
+	                for (var i = 0; i < parseInt($scope.cols) ; i++) {
+	                    $scope.arr.push(i+1);
+	                    //console.log( $scope.arr.length);
+	                }
+	                //$(".searchMethod").text($(".dropdown-menu li a option:selected").text());
+	            }
+
+	        });
+	        app.filter('reverse', function() {
+			  return function(items) {
+			    return items.slice().reverse();
+			  };
+			});
+	    </script>
+		<script type="text/javascript">
+			 $(function(){
+			 	console.log("Fire");
+			    $(".dropdown-menu li a").change(function(){
+					console.log("Button");
+			      $(".searchMethod").text($(this).text());
+			      $(".searchMethod").val($(this).text());
+			      //$(".btn:first-child").text($(this).text());
+			      //$(".btn:first-child").val($(this).text());
+						
+			   });
+			
+			});
+		</script>
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+
+        <!-- /Javascript -->
+
+    </body>
+</html>
