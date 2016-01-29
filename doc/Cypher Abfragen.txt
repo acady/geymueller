@@ -178,6 +178,13 @@ WHERE r1.Metadaten = r2.Metadaten
 CREATE (r1)-[c:CONNECTED_REFERENCE]->(r2)
 RETURN r2
 
+// FOTOGRAFIEN
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.OBJEKT IS NOT NULL
+MERGE (o:Objekt { name: csvLine.OBJEKT })
+
+
+
+
 // DELETE 
 
 MATCH (n)
