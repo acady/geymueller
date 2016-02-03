@@ -179,10 +179,21 @@ CREATE (r1)-[c:CONNECTED_REFERENCE]->(r2)
 RETURN r2
 
 // FOTOGRAFIEN
-LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/datenmodell_test.csv" AS csvLine WITH csvLine WHERE csvLine.OBJEKT IS NOT NULL
-MERGE (o:Objekt { name: csvLine.OBJEKT })
+LOAD CSV WITH HEADERS FROM "http://localhost/geymueller/data/christoph/csv/Sichtungs-Fotografien_09102015.csv" AS csvLine WITH csvLine WHERE csvLine.INVNR IS NOT NULL
+CREATE (f:Foto { meta: csvLine.META, invnr: csvLine.INVNR , bezeichnung: csvLine.BEZEICHNUNG , foto: csvLine.FOTO_NR , werk: csvLine.WERK, bemerkung: csvLine.BEMERKUNG, zeit: csvLine.ZEIT, person: csvLine.PERSON, ort: csvLine.ORT, unknown: csvLine.X, nummer: csvLine.NUMMER})
+
+MATCH (i:Inventar), (f:Foto)
+WHERE i.invnr = f.invnr
+CREATE (i)-[c:HAS_IMAGE]->(f)
+RETURN f
 
 
+curl -H accept:application/json -H content-type:application/json -d '{"statements": [{"statement":"MATCH p=(f:Foto)<--(i:Inventar) RETURN NODES(p)"}]}' http://localhost:7474/db/data/transaction/commit > geymueller.json
+
+
+CREATE (i)-[:TYP_OF]->(o)
+
+Sichtungs-Fotografien_09102015
 
 
 // DELETE 
