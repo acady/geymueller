@@ -10,16 +10,18 @@ $(document).ready(function() {
   var APPLICATION_ID = 'Z2MKQXTA6M';
   var SEARCH_ONLY_API_KEY = 'f47368801b2925be0de03bca8da21c60';
   //var INDEX_NAME = 'getstarted_actors';
-  var INDEX_NAME = 'geymueller_test';
-  var PARAMS = {
+  var INDEX_NAME = 'geymueller_next';
+  //var INDEX_NAME = 'geymueller_test';
+
+    var PARAMS = {
     hitsPerPage: 10,
     maxValuesPerFacet: 8,
-    facets: ['person'],
-    disjunctiveFacets: ['material', 'inhalt', 'objekt']
+    facets: ['file.person'],
+    disjunctiveFacets: ['file.material', 'file.inhalt', 'file.objekt']
   };
-  var FACETS_SLIDER = ['zeit'];
-  var FACETS_ORDER_OF_DISPLAY = ['material', 'inhalt', 'objekt', 'person', 'zeit'];
-  var FACETS_LABELS = {Material: 'material', Inhalt: 'inhalt', Objekt: 'objekt', Personen: 'person', Zeit: 'zeit'};
+  var FACETS_SLIDER = ['file.zeit'];
+  var FACETS_ORDER_OF_DISPLAY = ['file.material', 'file.inhalt', 'file.objekt', 'file.person', 'file.zeit'];
+  var FACETS_LABELS = {Material: 'file.material', Inhalt: 'file.inhalt', Objekt: 'file.objekt', Personen: 'file.person', Zeit: 'file.zeit'};
 
   // Client + Helper initialization
   var algolia = algoliasearch(APPLICATION_ID, SEARCH_ONLY_API_KEY);

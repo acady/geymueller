@@ -6,7 +6,7 @@
     Base template (without user's data) checked by http://validator.w3.org : "This page is valid XHTML 1.0 Transitional"
     -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <META HTTP-EQUIV="refresh" CONTENT="0;url=/geonames/">
+    <META HTTP-EQUIV="refresh" CONTENT="0;url=/search/">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>geymueller.dev</title>
 <body style="background: #C7CDD2;">
