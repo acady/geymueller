@@ -1,0 +1,71 @@
+Slogan:
+Renaissance Architecture
+
+das Projekt
+> Beschreibung de + Bild Skizze (img6)
+
+A Digital Anthology of Heinrich von Geymüller
+
+
+Das Forschungsprojekt sieht die Digitaliserung des Nachlasses des schweizer Architekturhistorikers Heinrich von Geymüller (1839-1909) vor. Geymüller hat die Disziplin mit seinen Arbeiten unter anderen durch zwei grundlegende Neuerungen methodologisch erweitert: Er hat zum Einen begonnen, neben der Baugeschichte und durch das systematische Studium von Architekturzeichnungen, die Entwurfsgeschichte ins Zentrum zu stellen, sowie deren adäquate Wiedergabe im Druck (Faksimile) zu ermöglichen. Zum Anderen hat Geymüller durch seine „Restaurationen“ bzw. „Rekonstruktionen“ versucht graphische Visualisierungen jener den Entwurfszeichnungen zu Grunde liegenden Projekte zu erstellen. 
+Der umfangreiche Nachlass besteht aus einer Vielzahl unterschiedlicher Quellen, die die facettenreichen Interessensgebiete und umfassende Quellenkenntnis des Architekturhistorikers belegen. Die Sammlung enthält handschriftliche Notizen und Skizzen, Manuskripte, großformatige Architekturzeichnungen, Exzerpte aus Publikationen und Archiven, Fotografien und Negative, Druckgraphiken, Korrekturfahnen, sowie auch eine umfangreiche Korrespondenz u.a. mit prominenten Brief-Partnern wie Jakob Burckhardt, Aby Warburg, Heinrich Wölfflin, Gustave Moreau u.s.w.
+
+Das Datenmodell soll dabei anhand folgender ausgewählter Themenkomplexen erstellt werden: 
+
+1) Die Entwürfe für den Neubau von Sankt Peter in Rom 
+2) Das „Toscanawerk“ („Die Architektur der Renaissance in Toscana“)
+3) Du Cerceau und die Baukunst der Renaissance in Frankreich
+4) Der „Thesaurus“ (eine umfangreiche und systematische Sammlung architekturbezogener Abbildungen)
+5) Fragen zu Theorie und Praxis der Denkmalpflege
+
+Die digitale Zugänglichkeit der Daten soll sich dabei nicht ausschließlich auf das „Material“ selbst beschränken, sondern WissenschaftlerInnen ermöglichen Kontextualisierungen herzustellen bzw. gezielte Fragen aus dem Datenbestand zu beantworten. Neben der besseren Zugänglichkeit zum Nachlass sollen vor allem auch biographische, chronologische, topographische und forschungsgeschichtliche Zusammenhänge sichtbar werden. 
+
+
+Neuigkeiten
+> Valetta (img4) + paper link 
+	
+	Im folgenden Artikel stehen technische Lösungen zur Diskussion, welche sich mit der Repräsentation von Archivquellen im urbanen Raum auseinandersetzen. Die Vernetzung von Quellen, ihrem/ihrer Betrachter/in und der sie betreffenden Entität wird dabei über den jeweiligen Ort angestrebt, an welchem Informationen erstmalig aufgenommen wurden. Dazu wurden bestehende Mobil-Technologien und Software-Applikationen aus unterschiedlichen Anwendungsgebieten getestet und auf ihre Tauglichkeit hin überprüft. In einer konkreten Fallstudie soll schließlich an einem realen Ort aufgezeigt werden, wie sich derartige Technologien am besten eignen, um ausgewählte Archiv-Daten in urbanen Räumen digital zu repräsentieren bzw. welche Entwicklungen zukünftig erforderlich wären.
+	
+	Die Ergebnisse gründen unter anderem auf Vorarbeiten eines aktuell noch laufenden Forschungsprojektes an der Karl-Franzens Universität in Graz, in welchem sich die Autoren mit unterschiedlichen Methoden der inhaltlichen Erfassung bzw. Wiedergabe von Architektur bezogenen Archivquellen befasst haben. Die zentrale Herausforderung stellte sich dabei vor allem in der Handhabung unterschiedlich semantischer Kategorien, die sowohl in der Erfassung als auch in der Web-Repräsentation jeweils individuelle Lösungen erforderten.	
+	
+	Im Forschungsprojekt wurden daher Probleme von Arbeitsweisen in Archiven sowie mit Web-Repräsentationen identifiziert, welche sich hauptsächlich auf die Aussagequalität von Quellen-Inhalten beziehen. Sie konnten mehrheitlich auf die Zusammenführung unterschiedlicher Medialitäten und deren Darstellbarkeiten zurückgeführt werden, sowie auch auf fehlende Referenzen zu Entitäten außerhalb des Archivs. Einerseits wurde dabei zwischen Bild-, Text-, und Hybridquellen unterschieden und andererseits zwischen materiellen und immateriellen Referenten. Wie im Fallbeispiel anschließend stärker noch erkennbar sein wird lässt sich die Wiedergabe der meisten Quellen-Inhalte nur in einem direkten realen Bezug am Ort selbst optimal gestalten.
+	
+
+> ÖAW Präsentation Wien 
+	> (img5)
+	> link: https://acdh.oeaw.ac.at/acdh/en/dha-conference2015
+	
+	> The Digital Humanities Austria conference (dha2015) was organised by the Austrian Centre for Digital Humanities (ACDH) of the Austrian Academy of Sciences. It took place from Monday, November 30th to Wednesday, December 2nd at the Theatre Hall of the Austrian Academy of Sciences in Vienna.
+
+
+
+
+Zwischenstand
+> Bilder von Zwischenbericht (img1 - img3)
+> link pdf
+
+Durchgeführte Forschungen (Research highlights)
+
+In der ersten Jahreshälfte wurde die, bereits 2014 begonnenen Inventur des gesamten, am Institut für Kunstgeschichte Graz verbliebenen Nachlass-Bestandes fortgeführt. Der Grazer Nachlass umfasst an die 71.500 Einzelobjekte, wobei es sich um unterschiedliche Objekttypen handelt. Die Sichtung diente der Ergänzung bisher nicht berücksichtigter Objekte, sowie der ersten Auswahl des zu digitalisierenden Materials. Die dafür vorgesehenen Objekte wurden nach jenen, im Forschungsantrag bereits vordefinierten Themenberiechen (St. Peter/Rom, Toskanawerk, DuCerceau/Renaissance in Frankreich, Thesaurus, und Denkmalpflege) ausgewählt und einer dreistufigen Prioritätsklassifikation zugeordnet. Der weiter zu bearbeitende Bestand konnte demnach auf eine Anzahl von ungefähr 18.000 Objekten reduziert werden, wovon an die 4.000 der höchsten Prioritätsklasse zugeordnet wurden. 
+
+Applikation
+
+> Bild Web Applikation
+> Text
+
+Mit der neuen >>‚Bibliotheca Hertziana’<< und der digitalen Sammlung des >>‚Schloss Belvedere’<<  („stöbern und finden“) gibt es bereits zwei Archive, die jenen, von uns gewählten Ansatz verfolgen. Der Besucher wird über Kollektionen und Sammlungen an den Archivbestand heran geführt. Dies entspricht der Idee des ‚semi-digitalen, generierten Skizzenbuchs’, welches als Ausgangspunkt für weitere Forschungen am Objekt dient. Während in der Sammlung des Belvedere die Zusammenstellungen noch von Archivaren/innen erzeugt werden, können wir Kollektionen mit Hilfe der Suchanfragen automatisiert generieren.
+
+ http://www.biblhertz.it/?id=49
+ http://digital.belvedere.at/emuseum/#
+ 
+> Publikationen 
+
+> Projekt > Team
+
+Teaser 
+	> link (img_DHA) 	> link: https://acdh.oeaw.ac.at/acdh/en/dha-conference2015
+	> link (img_OAW)	> http://www.oeaw.ac.at/oesterreichische-akademie-der-wissenschaften/
+
+
+
+
